@@ -4,7 +4,7 @@
 	<groupId>com.smartclient</groupId>
 	<artifactId>Smartclient</artifactId>
 	<packaging>jar</packaging>
-	<version>1.0-SNAPSHOT</version>
+	<version>0.2-SNAPSHOT</version>
 	<name>Smartclient</name>
 	<url>http://maven.apache.org</url>
 	<properties>
@@ -18,11 +18,17 @@
 			<artifactId>testng</artifactId>
 			<version>6.9.10</version>
 		</dependency>
-		<!--  Assuming Firefox 45 ESR. Newer versions not always stable -->
+		<!-- Assuming Firefox 45 ESR. Newer versions not always stable -->
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-java</artifactId>
 			<version>2.53.1</version>
 		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+		</dependency>
+
 	</dependencies>
 </project>

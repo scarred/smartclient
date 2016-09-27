@@ -25,6 +25,17 @@ public class DropDownGridPage extends PageObject {
 		return this;
 	}
 
+	/**
+	 * Choose the first item from the select, which meets all specified criteria
+	 * 
+	 * @param item
+	 *            - text in 'Item' tab
+	 * @param unit
+	 *            - Unit value
+	 * @param cost
+	 *            - Unit cost minimal value
+	 * @return
+	 */
 	public DropDownGridPage setItem(String item, String unit, double cost) {
 		new Actions(driver).sendKeys(Keys.ARROW_DOWN).perform();
 

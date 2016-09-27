@@ -4,18 +4,14 @@ import org.testng.AssertJUnit;
 
 import com.smartclient.pages.DropDownGridPage;
 
+public class TestTwo extends TestCase {
 
-public class TestTwo extends TestCase{
-	
-	
-	public void testMain() throws Exception {
+	public void testMain() {
 		DropDownGridPage ddg = new DropDownGridPage(driver);
 		ddg = ddg.expand();
 		ddg = ddg.setItem("Exercise", "Ea", 1.1);
-		
+
 		AssertJUnit.assertTrue("No matching elements found", ddg.isItemFound());
-		
 	}
 
-	
 }

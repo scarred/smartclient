@@ -5,7 +5,7 @@ import com.smartclient.pages.TileSortFilteringPage;
 
 public class TestOne extends TestCase {
 
-	public void testMain() throws Exception {
+	public void testMain() {
 		TileSortFilteringPage tsp = new TileSortFilteringPage(driver);
 		tsp = tsp.setFilters("a", 40, "Life Span", true);
 

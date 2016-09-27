@@ -16,4 +16,12 @@ public class Tools {
 		return sb.toString();
 	}
 
+	public static void sleepWait(long milis) {
+		try {
+			Thread.sleep(milis);
+		} catch (InterruptedException e) {
+			Log.error("sleepWait error: " + e.getMessage());
+		}
+	}
+
 }

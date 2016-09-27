@@ -5,9 +5,13 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
+import org.testng.Assert;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+
+import com.smartclient.misc.Log;
+import com.smartclient.misc.Values;
 
 public abstract class TestCase {
 
@@ -22,37 +26,41 @@ public abstract class TestCase {
 		try {
 			testMain();
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			Log.fatal(e.getMessage());
+			Assert.fail(e.getMessage());
+			e.printStackTrace();
 		}
 	}
 
-	// TODO timeout can be in separate parameter file
-	// TODO non-standard installation of Firefox - need to adjust for other
-	// target machine
-	@BeforeTest
+	@BeforeClass
 	public void setUp() {
 
 		try {
-			System.setProperty("webdriver.firefox.bin", "D:\\APPS\\FF\\firefox.exe");
+			// non-standard installation of Firefox - can be removed for default
+			// install location
+			System.setProperty("webdriver.firefox.bin", Values.FIREFOX_LOCATION);
 
 			driver = new FirefoxDriver();
-			driver.manage().timeouts().pageLoadTimeout(15, TimeUnit.SECONDS);
+			driver.manage().timeouts().pageLoadTimeout(Values.PAGE_LOAD_TIMEOUT, TimeUnit.SECONDS);
+			driver.manage().timeouts().implicitlyWait(Values.IMPLICIT_WAIT, TimeUnit.SECONDS);
 			driver.manage().window().maximize();
+			Log.info("setup done");
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Log.fatal(e.getMessage());
+			Assert.fail(e.getMessage());
 		}
 
 	}
 
-	@AfterTest
+	@AfterClass
 	public void tearDown() {
 		try {
 			if (driver != null)
 				driver.quit();
+			Log.info("teardown done");
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Log.fatal(e.getMessage());
+			Assert.fail(e.getMessage());
 		}
 	}
 

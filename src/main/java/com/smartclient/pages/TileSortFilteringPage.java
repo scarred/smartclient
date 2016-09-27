@@ -16,23 +16,34 @@ public class TileSortFilteringPage extends PageObject {
 
 	private String URL = "http://www.smartclient.com/smartgwt/showcase/#featured_tile_filtering";
 
-	private final By byAnimalTextBox = By.id("isc_2I");
-	private final By byMinSliderValue = By.xpath(".//*[@id='isc_2E']//td");
-	private final By byMaxSliderValue = By.xpath(".//*[@id='isc_2G']//td");
+	private final By byAnimalTextBox = By.xpath(".//label[contains(text(), 'Animal')]/parent::td/following-sibling::td/input");
+	private final By byMinSliderValue = By.xpath("(.//*[@class='sliderRange'])[1]");
+	private final By byMaxSliderValue = By.xpath("(.//*[@class='sliderRange'])[2]");
 	private final By byLifeSpanSliderTrack = By.id("isc_28");
 	private final By bySortingSelect = By.id("isc_34");
 	private final By bySortAscending = By.id("isc_3E");
 	private final By byButtonFilter = By.xpath(".//*[@id='isc_3I']//*[@class[contains(., 'button')]][contains(., 'Filter')]");
 	private final By byResult = By.xpath("//div[@id[contains(., 'isc')]][@class='simpleTile'][@style[not(contains(., 'visibility: hidden'))]]");
 
-	public TileSortFilteringPage setFilters(String string, int i, String string2, boolean b) throws Exception {
+	/**
+	 * 
+	 * @param filterText
+	 *            - 'Animal' text box
+	 * @param lifeSpan
+	 *            - lifespan slider value
+	 * @param sortBy
+	 *            - sort order
+	 * @param ascending
+	 *            - checkbox 'Ascending'
+	 */
+	public TileSortFilteringPage setFilters(String filterText, int lifeSpan, String sortBy, boolean ascending) {
 		driver.findElement(byAnimalTextBox).clear();
-		driver.findElement(byAnimalTextBox).sendKeys(string);
-		moveSliderToValue(i);
+		driver.findElement(byAnimalTextBox).sendKeys(filterText);
+		moveSliderToValue(lifeSpan);
 		setDivSelect(driver.findElement(bySortingSelect), "Life Span");
 
 		boolean ascendingChecked = driver.findElement(bySortAscending).getAttribute("class").equals("checkboxTrue");
-		if (b) {
+		if (ascending) {
 			if (!ascendingChecked)
 				driver.findElement(bySortAscending).click();
 		} else {
@@ -46,7 +57,7 @@ public class TileSortFilteringPage extends PageObject {
 	}
 
 	// TODO final slider position dependent on resolution - needs improvements
-	private void moveSliderToValue(int value) throws Exception {
+	private void moveSliderToValue(int value) {
 		int min = Integer.parseInt(driver.findElement(byMinSliderValue).getText());
 		int max = Integer.parseInt(driver.findElement(byMaxSliderValue).getText());
 
