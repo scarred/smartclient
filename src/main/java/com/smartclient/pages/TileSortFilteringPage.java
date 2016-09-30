@@ -40,7 +40,7 @@ public class TileSortFilteringPage extends PageObject {
 		driver.findElement(byAnimalTextBox).clear();
 		driver.findElement(byAnimalTextBox).sendKeys(filterText);
 		moveSliderToValue(lifeSpan);
-		setDivSelect(driver.findElement(bySortingSelect), "Life Span");
+		setDivSelect(driver.findElement(bySortingSelect), sortBy);
 
 		boolean ascendingChecked = driver.findElement(bySortAscending).getAttribute("class").equals("checkboxTrue");
 		if (ascending) {
